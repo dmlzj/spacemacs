@@ -133,9 +133,16 @@
     (progn
       (add-to-list 'spacemacs-jump-handlers-php-mode 'ac-php-find-symbol-at-point)
       (add-hook 'php-mode-hook 'ac-php-core-eldoc-setup)
-      (spacemacs|add-company-backends
-        :modes php-mode
-        :backends (company-ac-php-backend company-phpactor)))))
+      (set (make-local-variable 'company-backends)
+           '((company-ac-php-backend company-dabbrev-code)
+             company-capf company-files
+             )
+           )
+      ;; (spacemacs|add-company-backends
+      ;;   :modes php-mode
+      ;;   :backends (company-ac-php-backend company-phpactor))
+      )
+    ))
 
 (defun php/init-geben ()
   (use-package geben
